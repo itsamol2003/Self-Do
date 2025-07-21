@@ -103,11 +103,12 @@ const cars = [
   },
 ];
 
+
 const HomePage: React.FC = () => {
   const carRef = useRef<HTMLImageElement>(null);
   const howToCarRef = useRef<HTMLImageElement>(null);
   const navigate = useNavigate(); // ✅ this enables redirection
-
+  
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
@@ -126,6 +127,7 @@ const HomePage: React.FC = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+  
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#1e1b2d] via-[#241d3e] to-[#1f1940] text-white">
@@ -167,26 +169,34 @@ const HomePage: React.FC = () => {
             Unbeatable Rental Deals
           </h2>
 
-          <div className="flex flex-col sm:flex-row flex-wrap items-center gap-4 mb-8">
-            <select className="border border-gray-300 rounded-md px-3 py-2 text-sm w-full sm:w-auto focus:outline-none">
-              <option>Model</option>
-            </select>
-            <select className="border border-gray-300 rounded-md px-3 py-2 text-sm w-full sm:w-auto focus:outline-none">
-              <option>Location</option>
-            </select>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-8">
+            <div className="w-full sm:w-auto sm:max-w-none max-w-[60vw] overflow-hidden">
+              <select className="border border-gray-300 rounded-md px-3 py-2 text-sm w-full focus:outline-none bg-white appearance-none">
+                <option>Model</option>
+                <option>Hyundai</option>
+                <option>Toyota</option>
+              </select>
+            </div>
+
+            <div className="relative w-full sm:max-w-none max-w-[60vw] overflow-hidden">
+              <select className="border border-gray-300 rounded-md px-3 py-2 text-sm w-full focus:outline-none bg-white z-10">
+                <option>Location</option>
+              </select>
+            </div>
+
             <input
               type="date"
-              className="border border-gray-300 rounded-md px-3 py-2 text-sm w-full sm:w-auto focus:outline-none"
+              className="border border-gray-300 rounded-md px-3 py-2 text-sm w-full focus:outline-none"
             />
-            <button className="w-full sm:w-auto bg-white border border-orange-600 text-orange-600 px-4 py-2 rounded-md text-sm flex items-center justify-center gap-2 hover:bg-orange-50 transition">
+
+            <button className="bg-white border border-orange-600 text-orange-600 px-4 py-2 rounded-md text-sm flex items-center justify-center gap-2 hover:bg-orange-50 transition w-full">
               <Search size={16} />
               Search
             </button>
 
-            {/* ✅ View All Button */}
             <button
               onClick={() => navigate("/view-all-car")}
-              className="w-full sm:w-auto bg-orange-600 text-white px-4 py-2 rounded-md text-sm flex items-center justify-center gap-2 hover:bg-orange-700 transition"
+              className="bg-orange-600 text-white px-4 py-2 rounded-md text-sm flex items-center justify-center gap-2 hover:bg-orange-700 transition w-full"
             >
               <Eye size={16} />
               View All
@@ -197,7 +207,7 @@ const HomePage: React.FC = () => {
             {cars.map((car) => (
               <div
                 key={car.id}
-                onClick={() => navigate(`/Booking/${car.id}`)} // ✅ redirect to booking page
+                onClick={() => navigate(`/Booking/${car.id}`)}
                 className="cursor-pointer bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition"
               >
                 <img
@@ -448,31 +458,30 @@ const HomePage: React.FC = () => {
             </p>
 
             <div className="flex gap-4 mt-6">
-  <a
-    href="https://play.google.com/store/apps" // Replace with actual app link if available
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    <img
-      src={googlePlay}
-      alt="Google Play"
-      className="h-12 w-auto cursor-pointer"
-    />
-  </a>
+              <a
+                href="https://play.google.com/store/apps" // Replace with actual app link if available
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src={googlePlay}
+                  alt="Google Play"
+                  className="h-12 w-auto cursor-pointer"
+                />
+              </a>
 
-  <a
-    href="https://www.apple.com/in/app-store/" // Replace with actual app link if available
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    <img
-      src={appStore}
-      alt="App Store"
-      className="h-12 w-auto cursor-pointer"
-    />
-  </a>
-</div>
-
+              <a
+                href="https://www.apple.com/in/app-store/" // Replace with actual app link if available
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src={appStore}
+                  alt="App Store"
+                  className="h-12 w-auto cursor-pointer"
+                />
+              </a>
+            </div>
           </div>
 
           {/* Right Phone UI Image */}

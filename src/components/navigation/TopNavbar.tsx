@@ -73,18 +73,18 @@ const Navbar = () => {
             </button>
             {servicesOpen && (
               <div className="absolute right-0 mt-2 w-44 bg-white border border-gray-200 rounded shadow-md z-50">
-                <Link to="/support" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Support</Link>
-                <Link to="/my-profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">My Profile</Link>
-                <Link to="/reviews" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Feedback</Link>
                 <Link to="/my-booking" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">My Booking</Link>
-                <Link to="/about-us" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">About Us</Link>
+                <Link to="/my-profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">My Profile</Link>
+                <Link to="/support" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Support</Link>
+                <Link to="/reviews" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Feedback</Link>
                 <Link to="/contact-us" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Contact Us</Link>
+                <Link to="/about-us" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">About US</Link>
                 <Link to="/privacy-policy" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Privacy Policy</Link>
                 <Link to="/terms" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Terms</Link>
               </div>
             )}
           </div>
-
+ 
           {/* Username Dropdown - All Screens */}
           {username ? (
             <div className="relative" ref={dropdownRef}>
@@ -140,12 +140,12 @@ const Navbar = () => {
           <button onClick={() => setMobileMenuOpen(false)}>✕</button>
         </div>
         <div className="flex flex-col p-4 space-y-3 text-sm font-medium">
-          <Link to="/support" onClick={() => setMobileMenuOpen(false)}>Support</Link>
-          <Link to="/my-profile" onClick={() => setMobileMenuOpen(false)}>My Profile</Link>
-          <Link to="/reviews" onClick={() => setMobileMenuOpen(false)}>Feedback</Link>
           <Link to="/my-booking" onClick={() => setMobileMenuOpen(false)}>My Booking</Link>
-          <Link to="/about-us" onClick={() => setMobileMenuOpen(false)}>About Us</Link>
+          <Link to="/my-profile" onClick={() => setMobileMenuOpen(false)}>My Profile</Link>
+          <Link to="/support" onClick={() => setMobileMenuOpen(false)}>Support</Link>
+          <Link to="/reviews" onClick={() => setMobileMenuOpen(false)}>Feedback</Link>
           <Link to="/contact-us" onClick={() => setMobileMenuOpen(false)}>Contact Us</Link>
+          <Link to="/about-us" onClick={() => setMobileMenuOpen(false)}>About US</Link>
           <Link to="/privacy-policy" onClick={() => setMobileMenuOpen(false)}>Privacy Policy</Link>
           <Link to="/terms" onClick={() => setMobileMenuOpen(false)}>Terms</Link>
           {username ? (
