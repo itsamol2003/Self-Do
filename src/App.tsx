@@ -6,6 +6,9 @@ import { AuthProvider } from './context/AuthContext';
 import { SidebarProvider } from './context/SidebarContext';
 import PrivateRoute from './components/common/PrivateRoute';
 
+// ✅ IMPORT: ScrollToTop
+import ScrollToTop from './components/navigation/ScrollToTop';
+
 // Layout
 import DashboardLayout from './components/layouts/DashboardLayout';
 
@@ -17,7 +20,6 @@ import VerifyIdentityPage from './pages/auth/VerifyIdentityPage';
 import ForgotPassPage from './pages/auth/ForgotPassPage';
 import BookingPage from './pages/Booking/Booking';
 import ReviewsPage from './pages/Reviews/Reviews';
-
 import MyBookingPage from './pages/Booking/MyBookingPage';
 import BookingConfirmationPage from './pages/Booking/BookingConfirmationPage';
 import SupportPage from './pages/Support/support';
@@ -43,6 +45,8 @@ const App: React.FC = () => (
   <AuthProvider>
     <SidebarProvider>
       <Router>
+        {/* ✅ USE ScrollToTop once inside Router but outside Routes */}
+        <ScrollToTop />
         <Routes>
           {/* Public Routes */}
           <Route path="/" element={<HomePage />} />

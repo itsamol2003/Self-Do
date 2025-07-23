@@ -33,8 +33,8 @@ const Login = () => {
 
     if (!hasError) {
       const savedName = localStorage.getItem("registeredName_" + email);
-      localStorage.setItem("username", savedName || "User"); // ✅ Store username for header
-      setShowLocationPopup(true); // ✅ show location popup
+      localStorage.setItem("username", savedName || "User");
+      setShowLocationPopup(true);
     }
   };
 
@@ -43,7 +43,7 @@ const Login = () => {
     localStorage.setItem("lat", lat.toString());
     localStorage.setItem("lon", lon.toString());
     setShowLocationPopup(false);
-    navigate("/"); // ✅ Go to homepage
+    navigate("/");
   };
 
   return (
@@ -96,7 +96,9 @@ const Login = () => {
                   className="w-full outline-none text-sm h-full"
                 />
               </div>
-              {errors.password && <p className="text-red-500 text-[10px] mt-1">{errors.password}</p>}
+              {errors.password && (
+                <p className="text-red-500 text-[10px] mt-1">{errors.password}</p>
+              )}
             </div>
 
             {/* Forgot Password */}
@@ -122,17 +124,22 @@ const Login = () => {
               </span>
             </p>
           </form>
+
+          {/* Mobile Car Image - Only visible on small screens */}
+          <div className="mt-4 md:hidden w-full flex justify-center">
+            <img src={selfCar} alt="Car" className="w-[50%]" />
+          </div>
         </div>
 
-        {/* Car Image */}
+        {/* Desktop Car Image - hidden on small screens */}
         <img
           src={selfCar}
           alt="Car"
-          className="absolute bottom-[-40px] left-1/3 transform -translate-x-1/2 w-[50%] md:w-[30%] z-20"
+          className="hidden md:block absolute bottom-[-40px] left-1/3 transform -translate-x-1/2 w-[30%] z-20"
         />
       </div>
 
-      {/* ✅ Location Modal */}
+      {/* Location Modal */}
       {showLocationPopup && (
         <LocationModal
           onClose={() => setShowLocationPopup(false)}

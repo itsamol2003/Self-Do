@@ -43,8 +43,27 @@ export default function PaymentPage() {
 
   const handlePayment = () => {
     if (method === "card") {
-      if (!cardNumber || !name || !expiry || !cvv) {
-        alert("Please fill all card details.");
+      // Card Number: Only digits, between 12 to 16 digits
+      if (!/^\d{12,16}$/.test(cardNumber)) {
+        alert("Please enter a valid card number (12 to 16 digits only).");
+        return;
+      }
+
+      // Name: Required
+      if (!name.trim()) {
+        alert("Please enter the name on the card.");
+        return;
+      }
+
+      // Expiry: MM/YY format (MM = 01-12)
+      if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(expiry)) {
+        alert("Please enter expiry in MM/YY format with valid month (01–12).");
+        return;
+      }
+
+      // CVV: Exactly 3 digits
+      if (!/^\d{3}$/.test(cvv)) {
+        alert("Please enter a valid 3-digit CVV.");
         return;
       }
     }
@@ -91,10 +110,14 @@ export default function PaymentPage() {
               <div className="space-y-4">
                 <input
                   type="text"
-                  placeholder="XXXX XXXX XXXX"
+                  placeholder="Card Number (12–16 digits)"
                   value={cardNumber}
-                  onChange={(e) => setCardNumber(e.target.value)}
+                  onChange={(e) =>
+                    setCardNumber(e.target.value.replace(/\D/g, ""))
+                  }
                   className="w-full border border-gray-300 px-4 py-2 rounded-md"
+                  inputMode="numeric"
+                  maxLength={16}
                 />
                 <input
                   type="text"
@@ -108,15 +131,28 @@ export default function PaymentPage() {
                     type="text"
                     placeholder="MM/YY"
                     value={expiry}
-                    onChange={(e) => setExpiry(e.target.value)}
+                    onChange={(e) => {
+                      let input = e.target.value;
+                      input = input.replace(/[^\d/]/g, "");
+                      if (input.length === 2 && !input.includes("/")) {
+                        input = input + "/";
+                      }
+                      if (input.length > 5) return;
+                      setExpiry(input);
+                    }}
                     className="w-full border border-gray-300 px-4 py-2 rounded-md"
+                    maxLength={5}
                   />
                   <input
                     type="text"
-                    placeholder="3 digits"
+                    placeholder="CVV"
                     value={cvv}
-                    onChange={(e) => setCvv(e.target.value)}
+                    onChange={(e) =>
+                      setCvv(e.target.value.replace(/\D/g, ""))
+                    }
                     className="w-full border border-gray-300 px-4 py-2 rounded-md"
+                    inputMode="numeric"
+                    maxLength={3}
                   />
                 </div>
                 <button

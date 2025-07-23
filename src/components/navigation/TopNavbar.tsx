@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ChevronDown } from "lucide-react";
 import headerLogo from "../../../Assets/Logo-Header.svg";
+import MobileSidebar from "../../components/navigation/mobilesidbar";
 
 const Navbar = () => {
   const [username, setUsername] = useState<string | null>(null);
@@ -50,7 +51,9 @@ const Navbar = () => {
   return (
     <>
       {/* Navbar Header */}
-      <nav className="w-full bg-[#f8f6f8] py-2 px-4 sm:px-6 md:px-10 flex justify-between items-center shadow-sm sticky top-0 z-50">
+      <nav
+        className="w-full py-2 px-4 sm:px-6 md:px-10 flex justify-between items-center shadow-sm sticky top-0 z-50 transition-all duration-300 bg-white text-black"
+      >
         {/* Logo */}
         <Link to="/" className="flex items-center">
           <img
@@ -66,40 +69,40 @@ const Navbar = () => {
           <div className="relative hidden md:block" ref={servicesRef}>
             <button
               onClick={() => setServicesOpen(!servicesOpen)}
-              className="flex items-center text-sm md:text-base font-medium text-black focus:outline-none"
+              className="flex items-center text-sm md:text-base font-medium focus:outline-none"
             >
               Services
               <ChevronDown size={16} className="ml-1 sm:size-4 md:size-5" />
             </button>
             {servicesOpen && (
-              <div className="absolute right-0 mt-2 w-44 bg-white border border-gray-200 rounded shadow-md z-50">
-                <Link to="/my-booking" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">My Booking</Link>
-                <Link to="/my-profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">My Profile</Link>
-                <Link to="/support" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Support</Link>
-                <Link to="/reviews" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Feedback</Link>
-                <Link to="/contact-us" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Contact Us</Link>
-                <Link to="/about-us" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">About US</Link>
-                <Link to="/privacy-policy" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Privacy Policy</Link>
-                <Link to="/terms" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Terms</Link>
+              <div className="absolute right-0 mt-2 w-44 bg-white border border-gray-200 rounded shadow-md z-50 text-black">
+                <Link to="/my-booking" className="block px-4 py-2 text-sm hover:bg-gray-100">My Booking</Link>
+                <Link to="/my-profile" className="block px-4 py-2 text-sm hover:bg-gray-100">My Profile</Link>
+                <Link to="/support" className="block px-4 py-2 text-sm hover:bg-gray-100">Support</Link>
+                <Link to="/reviews" className="block px-4 py-2 text-sm hover:bg-gray-100">Feedback</Link>
+                <Link to="/contact-us" className="block px-4 py-2 text-sm hover:bg-gray-100">Contact Us</Link>
+                <Link to="/about-us" className="block px-4 py-2 text-sm hover:bg-gray-100">About Us</Link>
+                <Link to="/privacy-policy" className="block px-4 py-2 text-sm hover:bg-gray-100">Privacy Policy</Link>
+                <Link to="/terms" className="block px-4 py-2 text-sm hover:bg-gray-100">Terms</Link>
               </div>
             )}
           </div>
- 
+
           {/* Username Dropdown - All Screens */}
           {username ? (
             <div className="relative" ref={dropdownRef}>
               <button
                 onClick={() => setDropdownOpen(!dropdownOpen)}
-                className="text-black text-[10px] sm:text-sm md:text-base font-semibold capitalize"
+                className="text-sm md:text-base font-semibold capitalize focus:outline-none"
               >
                 {username}
               </button>
               {dropdownOpen && (
-                <div className="absolute right-0 mt-2 w-32 bg-white border border-gray-200 rounded shadow-md z-50">
-                  <Link to="/my-profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">My Profile</Link>
+                <div className="absolute right-0 mt-2 w-32 bg-white border border-gray-200 rounded shadow-md z-50 text-black">
+                  <Link to="/my-profile" className="block px-4 py-2 text-sm hover:bg-gray-100">My Profile</Link>
                   <button
                     onClick={handleLogout}
-                    className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    className="w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
                   >
                     Logout
                   </button>
@@ -117,7 +120,7 @@ const Navbar = () => {
 
           {/* Hamburger Icon - Mobile Only */}
           <button
-            className="md:hidden text-black"
+            className="md:hidden"
             onClick={() => setMobileMenuOpen(true)}
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
@@ -130,31 +133,12 @@ const Navbar = () => {
       </nav>
 
       {/* Mobile Sidebar Drawer */}
-      <div
-        className={`fixed right-0 top-[64px] w-64 h-[calc(100%-64px)] bg-white shadow-lg z-40 transform ${
-          mobileMenuOpen ? "translate-x-0" : "translate-x-full"
-        } transition-transform duration-300 ease-in-out`}
-      >
-        <div className="p-4 flex justify-between items-center border-b">
-          <h2 className="text-lg font-bold">Menu</h2>
-          <button onClick={() => setMobileMenuOpen(false)}>✕</button>
-        </div>
-        <div className="flex flex-col p-4 space-y-3 text-sm font-medium">
-          <Link to="/my-booking" onClick={() => setMobileMenuOpen(false)}>My Booking</Link>
-          <Link to="/my-profile" onClick={() => setMobileMenuOpen(false)}>My Profile</Link>
-          <Link to="/support" onClick={() => setMobileMenuOpen(false)}>Support</Link>
-          <Link to="/reviews" onClick={() => setMobileMenuOpen(false)}>Feedback</Link>
-          <Link to="/contact-us" onClick={() => setMobileMenuOpen(false)}>Contact Us</Link>
-          <Link to="/about-us" onClick={() => setMobileMenuOpen(false)}>About US</Link>
-          <Link to="/privacy-policy" onClick={() => setMobileMenuOpen(false)}>Privacy Policy</Link>
-          <Link to="/terms" onClick={() => setMobileMenuOpen(false)}>Terms</Link>
-          {username ? (
-            <button onClick={() => { handleLogout(); setMobileMenuOpen(false); }} className="text-left">Logout</button>
-          ) : (
-            <Link to="/login" onClick={() => setMobileMenuOpen(false)}>Login/Signup</Link>
-          )}
-        </div>
-      </div>
+      <MobileSidebar
+        isOpen={mobileMenuOpen}
+        username={username}
+        onClose={() => setMobileMenuOpen(false)}
+        onLogout={handleLogout}
+      />
     </>
   );
 };
