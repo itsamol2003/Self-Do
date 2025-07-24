@@ -94,20 +94,21 @@ const Register = () => {
   };
 
   return (
- <div className="min-h-screen bg-gray-100 flex items-center justify-center px-2 md:px-6 lg:px-10 relative">
+    <div className="min-h-screen bg-gray-100 px-2 lg:px-10 flex flex-col lg:flex-row items-start lg:items-center justify-center relative overflow-y-auto">
+      <div className="relative flex flex-col lg:flex-row w-full max-w-6xl bg-white shadow-lg rounded-2xl overflow-hidden lg:h-[600px]">
 
-      <div className="relative flex flex-col md:flex-row w-full max-w-5xl bg-white shadow-lg rounded-2xl overflow-hidden pb-[120px] md:pb-[160px]">
-        {/* Left Side */}
-        <div className="bg-[#F35B04] md:w-[40%] w-full p-6 text-white z-10 md:rounded-l-2xl rounded-t-2xl md:rounded-t-none text-center md:text-left flex flex-col justify-center">
-          <h1 className="text-2xl md:text-3xl font-semibold text-black">Welcome to</h1>
-          <h3 className="text-xl md:text-2xl font-serif font-semibold mt-1 mb-2">Self Do Car Rental</h3>
-          <p className="text-sm md:text-base text-black">Get started to explore your dashboard!</p>
+        {/* Left Panel */}
+        <div className="bg-[#F35B04] w-full lg:w-[40%] p-6 text-white z-10 rounded-t-2xl lg:rounded-l-2xl lg:rounded-tr-none text-center lg:text-left flex flex-col justify-center">
+          <h1 className="text-2xl lg:text-3xl font-semibold text-black">Welcome to</h1>
+          <h3 className="text-xl lg:text-2xl font-serif font-semibold mt-1 mb-2">
+            Self Do Car Rental
+          </h3>
+          <p className="text-sm lg:text-base text-black">Get started to explore your dashboard!</p>
         </div>
 
-        {/* Right Side */}
-        <div className="md:w-[60%] w-full bg-white px-6 py-8 flex flex-col items-center justify-center z-10">
-
-          <h2 className="text-lg md:text-xl mb-4 font-serif font-semibold text-black w-[90%] sm:w-[80%] md:w-[80%] text-left md:text-center">
+        {/* Right Panel */}
+        <div className="w-full lg:w-[60%] bg-white px-6 py-8 flex flex-col items-center justify-center z-10">
+          <h2 className="text-lg lg:text-xl mb-4 font-serif font-semibold text-black w-[90%] sm:w-[80%] lg:w-[80%] text-left lg:text-center">
             Sign up your Account
           </h2>
 
@@ -128,7 +129,7 @@ const Register = () => {
               label: "Email", icon: <FiMail />, value: email, onChange: setEmail, type: "email",
               name: "email", error: errors.email, placeholder: "Enter Your Email"
             }].map((field, idx) => (
-              <div key={idx} className="w-[90%] sm:w-[80%] md:w-[65%]">
+              <div key={idx} className="w-[90%] sm:w-[80%] lg:w-[65%]">
                 <label className="text-xs font-semibold mb-1 block">{field.label}</label>
                 <div className="flex items-center border border-gray-300 rounded-md h-10 px-2">
                   {field.icon}
@@ -146,7 +147,7 @@ const Register = () => {
 
             {!otpVerified && (
               <>
-                <div className="w-[90%] sm:w-[80%] md:w-[65%] flex gap-3">
+                <div className="w-[90%] sm:w-[80%] lg:w-[65%] flex gap-3">
                   <button
                     type="button"
                     className="text-white bg-[#F35B04] px-4 py-1 rounded-md text-xs"
@@ -166,7 +167,7 @@ const Register = () => {
                 </div>
 
                 {otpSent && (
-                  <div className="w-[90%] sm:w-[80%] md:w-[65%] flex gap-3">
+                  <div className="w-[90%] sm:w-[80%] lg:w-[65%] flex gap-3">
                     {otp.map((digit, index) => (
                       <input
                         key={index}
@@ -180,7 +181,7 @@ const Register = () => {
                   </div>
                 )}
                 {errors.otp && (
-                  <p className="text-red-500 text-[10px] w-[90%] sm:w-[80%] md:w-[65%]">{errors.otp}</p>
+                  <p className="text-red-500 text-[10px] w-[90%] sm:w-[80%] lg:w-[65%]">{errors.otp}</p>
                 )}
               </>
             )}
@@ -193,7 +194,7 @@ const Register = () => {
                 {
                   label: "Confirm Password", value: confirmPassword, onChange: setConfirmPassword, error: errors.confirmPassword
                 }].map((field, idx) => (
-                  <div key={idx} className="w-[90%] sm:w-[80%] md:w-[65%]">
+                  <div key={idx} className="w-[90%] sm:w-[80%] lg:w-[65%]">
                     <label className="text-xs font-semibold mb-1 block">{field.label}</label>
                     <div className="flex items-center border border-gray-300 rounded-md h-10 px-2">
                       <FiLock className="text-gray-500 mr-2 text-sm" />
@@ -209,7 +210,7 @@ const Register = () => {
                   </div>
                 ))}
 
-                <div className="w-[90%] sm:w-[80%] md:w-[65%]">
+                <div className="w-[90%] sm:w-[80%] lg:w-[65%]">
                   <label className="text-xs font-semibold block mb-1">Add Licence</label>
                   <input
                     type="file"
@@ -220,7 +221,7 @@ const Register = () => {
               </>
             )}
 
-            <div className="flex items-center text-[10px] text-gray-600 w-[90%] sm:w-[80%] md:w-[65%] mt-1">
+            <div className="flex items-center text-[10px] text-gray-600 w-[90%] sm:w-[80%] lg:w-[65%] mt-1">
               <input
                 type="checkbox"
                 className="mr-2"
@@ -230,23 +231,23 @@ const Register = () => {
               <label>By continuing, you agree to Self Do’s Privacy Policy & Terms of Use</label>
             </div>
             {errors.agree && (
-              <p className="text-red-500 text-[10px] w-[90%] sm:w-[80%] md:w-[65%] -mt-1">{errors.agree}</p>
+              <p className="text-red-500 text-[10px] w-[90%] sm:w-[80%] lg:w-[65%] -mt-1">{errors.agree}</p>
             )}
 
             <button
               type="submit"
-              className="bg-black text-white h-10 rounded-md hover:bg-gray-800 transition text-sm w-[90%] sm:w-[80%] md:w-[65%]"
+              className="bg-black text-white h-10 rounded-md hover:bg-gray-800 transition text-sm w-[90%] sm:w-[80%] lg:w-[65%]"
             >
               Sign Up
             </button>
           </form>
         </div>
 
-        {/* Car Image */}
+        {/* Car Image for Laptop only */}
        <img
   src={selfCar}
   alt="Car"
-  className="absolute bottom-[10px] md:bottom-[-30px] left-1/2 transform -translate-x-1/2 w-[50%] sm:w-[35%] md:w-[25%] z-20"
+  className="w-[60%] sm:w-[40%] lg:w-[25%] mx-auto mt-6 lg:mt-0 lg:absolute lg:bottom-[-40px] lg:left-[38%] lg:transform lg:-translate-x-1/2 z-30"
 />
 
       </div>
