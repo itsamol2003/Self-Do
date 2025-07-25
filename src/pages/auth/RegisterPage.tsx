@@ -96,14 +96,17 @@ const Register = () => {
   return (
     <div className="min-h-screen bg-gray-100 px-2 lg:px-10 flex flex-col lg:flex-row items-start lg:items-center justify-center relative overflow-y-auto">
       <div className="relative flex flex-col lg:flex-row w-full max-w-6xl bg-white shadow-lg rounded-2xl overflow-hidden lg:h-[600px]">
-
         {/* Left Panel */}
         <div className="bg-[#F35B04] w-full lg:w-[40%] p-6 text-white z-10 rounded-t-2xl lg:rounded-l-2xl lg:rounded-tr-none text-center lg:text-left flex flex-col justify-center">
-          <h1 className="text-2xl lg:text-3xl font-semibold text-black">Welcome to</h1>
+          <h1 className="text-2xl lg:text-3xl font-semibold text-black">
+            Welcome to
+          </h1>
           <h3 className="text-xl lg:text-2xl font-serif font-semibold mt-1 mb-2">
             Self Do Car Rental
           </h3>
-          <p className="text-sm lg:text-base text-black">Get started to explore your dashboard!</p>
+          <p className="text-sm lg:text-base text-black">
+            Get started to explore your dashboard!
+          </p>
         </div>
 
         {/* Right Panel */}
@@ -112,25 +115,49 @@ const Register = () => {
             Sign up your Account
           </h2>
 
-          <form onSubmit={handleSubmit} className="flex flex-col space-y-4 w-full items-center">
-            {[{
-              label: "Name", icon: <FiUser />, value: name, onChange: setName, type: "text", name: "name",
-              error: errors.name, placeholder: "Enter Your Name"
-            },
-            {
-              label: "Mobile", icon: <FiPhone />, value: mobile,
-              onChange: (v: string) => {
-                const onlyDigits = v.replace(/\D/g, "");
-                if (onlyDigits.length <= 10) setMobile(onlyDigits);
+          <form
+            onSubmit={handleSubmit}
+            className="flex flex-col space-y-4 w-full items-center"
+          >
+            {[
+              {
+                label: "Name",
+                icon: <FiUser />,
+                value: name,
+                onChange: setName,
+                type: "text",
+                name: "name",
+                error: errors.name,
+                placeholder: "Enter Your Name",
               },
-              type: "text", name: "mobile", error: errors.mobile, placeholder: "Enter Mobile Number"
-            },
-            {
-              label: "Email", icon: <FiMail />, value: email, onChange: setEmail, type: "email",
-              name: "email", error: errors.email, placeholder: "Enter Your Email"
-            }].map((field, idx) => (
+              {
+                label: "Mobile",
+                icon: <FiPhone />,
+                value: mobile,
+                onChange: (v: string) => {
+                  const onlyDigits = v.replace(/\D/g, "");
+                  if (onlyDigits.length <= 10) setMobile(onlyDigits);
+                },
+                type: "text",
+                name: "mobile",
+                error: errors.mobile,
+                placeholder: "Enter Mobile Number",
+              },
+              {
+                label: "Email",
+                icon: <FiMail />,
+                value: email,
+                onChange: setEmail,
+                type: "email",
+                name: "email",
+                error: errors.email,
+                placeholder: "Enter Your Email",
+              },
+            ].map((field, idx) => (
               <div key={idx} className="w-[90%] sm:w-[80%] lg:w-[65%]">
-                <label className="text-xs font-semibold mb-1 block">{field.label}</label>
+                <label className="text-xs font-semibold mb-1 block">
+                  {field.label}
+                </label>
                 <div className="flex items-center border border-gray-300 rounded-md h-10 px-2">
                   {field.icon}
                   <input
@@ -141,7 +168,9 @@ const Register = () => {
                     className="w-full outline-none text-sm h-full ml-2"
                   />
                 </div>
-                {field.error && <p className="text-red-500 text-[10px]">{field.error}</p>}
+                {field.error && (
+                  <p className="text-red-500 text-[10px]">{field.error}</p>
+                )}
               </div>
             ))}
 
@@ -181,21 +210,33 @@ const Register = () => {
                   </div>
                 )}
                 {errors.otp && (
-                  <p className="text-red-500 text-[10px] w-[90%] sm:w-[80%] lg:w-[65%]">{errors.otp}</p>
+                  <p className="text-red-500 text-[10px] w-[90%] sm:w-[80%] lg:w-[65%]">
+                    {errors.otp}
+                  </p>
                 )}
               </>
             )}
 
             {otpVerified && (
               <>
-                {[{
-                  label: "Password", value: password, onChange: setPassword, error: errors.password
-                },
-                {
-                  label: "Confirm Password", value: confirmPassword, onChange: setConfirmPassword, error: errors.confirmPassword
-                }].map((field, idx) => (
+                {[
+                  {
+                    label: "Password",
+                    value: password,
+                    onChange: setPassword,
+                    error: errors.password,
+                  },
+                  {
+                    label: "Confirm Password",
+                    value: confirmPassword,
+                    onChange: setConfirmPassword,
+                    error: errors.confirmPassword,
+                  },
+                ].map((field, idx) => (
                   <div key={idx} className="w-[90%] sm:w-[80%] lg:w-[65%]">
-                    <label className="text-xs font-semibold mb-1 block">{field.label}</label>
+                    <label className="text-xs font-semibold mb-1 block">
+                      {field.label}
+                    </label>
                     <div className="flex items-center border border-gray-300 rounded-md h-10 px-2">
                       <FiLock className="text-gray-500 mr-2 text-sm" />
                       <input
@@ -206,12 +247,16 @@ const Register = () => {
                         className="w-full outline-none text-sm h-full"
                       />
                     </div>
-                    {field.error && <p className="text-red-500 text-[10px]">{field.error}</p>}
+                    {field.error && (
+                      <p className="text-red-500 text-[10px]">{field.error}</p>
+                    )}
                   </div>
                 ))}
 
                 <div className="w-[90%] sm:w-[80%] lg:w-[65%]">
-                  <label className="text-xs font-semibold block mb-1">Add Licence</label>
+                  <label className="text-xs font-semibold block mb-1">
+                    Add Licence
+                  </label>
                   <input
                     type="file"
                     accept="image/*"
@@ -228,10 +273,15 @@ const Register = () => {
                 checked={agree}
                 onChange={(e) => setAgree(e.target.checked)}
               />
-              <label>By continuing, you agree to Self Do’s Privacy Policy & Terms of Use</label>
+              <label>
+                By continuing, you agree to Self Do’s Privacy Policy & Terms of
+                Use
+              </label>
             </div>
             {errors.agree && (
-              <p className="text-red-500 text-[10px] w-[90%] sm:w-[80%] lg:w-[65%] -mt-1">{errors.agree}</p>
+              <p className="text-red-500 text-[10px] w-[90%] sm:w-[80%] lg:w-[65%] -mt-1">
+                {errors.agree}
+              </p>
             )}
 
             <button
@@ -244,12 +294,11 @@ const Register = () => {
         </div>
 
         {/* Car Image for Laptop only */}
-       <img
-  src={selfCar}
-  alt="Car"
-  className="w-[60%] sm:w-[40%] lg:w-[25%] mx-auto mt-6 lg:mt-0 lg:absolute lg:bottom-[-40px] lg:left-[38%] lg:transform lg:-translate-x-1/2 z-30"
-/>
-
+        <img
+          src={selfCar}
+          alt="Car"
+          className="w-[60%] sm:w-[40%] lg:w-[25%] mx-auto mt-6 lg:mt-0 lg:absolute lg:bottom-[-40px] lg:left-[38%] lg:transform lg:-translate-x-1/2 z-30"
+        />
       </div>
 
       {showPopup && <RegisterSuccessPopup onClose={handlePopupClose} />}

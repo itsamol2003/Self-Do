@@ -3,9 +3,9 @@ import TopNavbar from "../../components/navigation/TopNavbar";
 import Footer from "../../components/navigation/Footer";
 import { useNavigate } from "react-router-dom";
 
-import DebitIcon from "../../../Assets/Debit.png";
+import DebitIcon from "../../../Assets/Debit card.png";
 import GPayIcon from "../../../Assets/GooglePay.png";
-import PhonePeIcon from "../../../Assets/PhonePay.png";
+import PhonePeIcon from "../../../Assets/PhonePay (2).png";
 
 import GpayQR from "../../../Assets/Scnner.png";
 import PhonePeQR from "../../../Assets/Scnner.png";
@@ -43,25 +43,18 @@ export default function PaymentPage() {
 
   const handlePayment = () => {
     if (method === "card") {
-      // Card Number: Only digits, between 12 to 16 digits
       if (!/^\d{12,16}$/.test(cardNumber)) {
         alert("Please enter a valid card number (12 to 16 digits only).");
         return;
       }
-
-      // Name: Required
       if (!name.trim()) {
         alert("Please enter the name on the card.");
         return;
       }
-
-      // Expiry: MM/YY format (MM = 01-12)
       if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(expiry)) {
         alert("Please enter expiry in MM/YY format with valid month (01–12).");
         return;
       }
-
-      // CVV: Exactly 3 digits
       if (!/^\d{3}$/.test(cvv)) {
         alert("Please enter a valid 3-digit CVV.");
         return;
@@ -79,27 +72,29 @@ export default function PaymentPage() {
         <div className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-12">
           {/* Left: Payment Options */}
           <div>
-            <h2 className="text-2xl font-semibold mb-4">Select Payment Options</h2>
+            <h2 className="text-2xl font-semibold mb-4">
+              Select Payment Options
+            </h2>
 
-            <div className="flex gap-3 mb-6">
-              {["card", "gpay", "phonepe"].map((m) => (
+            <div className="flex flex-wrap gap-4 mt-4 justify-start">
+              {[
+                { id: "card", icon: DebitIcon, alt: "Debit Card" },
+                { id: "gpay", icon: GPayIcon, alt: "Google Pay" },
+                { id: "phonepe", icon: PhonePeIcon, alt: "PhonePe" },
+              ].map((item) => (
                 <button
-                  key={m}
-                  onClick={() => setMethod(m)}
-                  className={`flex items-center gap-2 px-5 py-2 rounded-md border ${
-                    method === m ? "bg-[#FF6400] text-white" : "border-gray-300"
-                  }`}
+                  key={item.id}
+                  onClick={() => setMethod(item.id)}
+                  className={`w-16 h-16 md:w-20 md:h-20 flex items-center justify-center rounded-full border-4 transition-all duration-200 shadow ${
+                    method === item.id
+                      ? "border-[#FF6400] scale-105"
+                      : "border-gray-300"
+                  } ${item.id === "card" ? "bg-black" : "bg-white"}`}
                 >
                   <img
-                    src={
-                      m === "card"
-                        ? DebitIcon
-                        : m === "gpay"
-                        ? GPayIcon
-                        : PhonePeIcon
-                    }
-                    alt={m}
-                    className="w-10 h-10 bg-white rounded-md p-1 border border-gray-300 shadow"
+                    src={item.icon}
+                    alt={item.alt}
+                    className="object-contain w-6 h-6 md:w-8 md:h-8"
                   />
                 </button>
               ))}
@@ -107,7 +102,7 @@ export default function PaymentPage() {
 
             {/* Payment Forms */}
             {method === "card" && (
-              <div className="space-y-4">
+              <div className="space-y-4 mt-6">
                 <input
                   type="text"
                   placeholder="Card Number (12–16 digits)"
@@ -147,9 +142,7 @@ export default function PaymentPage() {
                     type="text"
                     placeholder="CVV"
                     value={cvv}
-                    onChange={(e) =>
-                      setCvv(e.target.value.replace(/\D/g, ""))
-                    }
+                    onChange={(e) => setCvv(e.target.value.replace(/\D/g, ""))}
                     className="w-full border border-gray-300 px-4 py-2 rounded-md"
                     inputMode="numeric"
                     maxLength={3}
@@ -165,7 +158,7 @@ export default function PaymentPage() {
             )}
 
             {(method === "gpay" || method === "phonepe") && (
-              <div className="p-4 border rounded-md text-center">
+              <div className="p-4 mt-6 border rounded-md text-center">
                 <img
                   src={method === "gpay" ? GpayQR : PhonePeQR}
                   alt="QR Code"
@@ -183,7 +176,9 @@ export default function PaymentPage() {
 
           {/* Right: Fare Details */}
           <div className="text-sm text-black/80 space-y-2">
-            <h3 className="text-black text-base font-semibold mb-2">Fare Details</h3>
+            <h3 className="text-black text-base font-semibold mb-2">
+              Fare Details
+            </h3>
             <div className="flex justify-between">
               <span>Car Model</span>
               <span className="text-black">{selectedCar.name}</span>
